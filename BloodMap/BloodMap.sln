@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodMap.API", "BloodMap\BloodMap.API.csproj", "{699D61F9-FA0B-4970-ACB4-6BD63E9F14DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodMap.Tests", "BloodMap.Tests\BloodMap.Tests.csproj", "{F492A250-174A-4751-BB48-1DB9A03EE5C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodMap.Data", "BloodMap.Data\BloodMap.Data.csproj", "{DB09C578-9612-4A04-BFF2-40432FB34332}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{699D61F9-FA0B-4970-ACB4-6BD63E9F14DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{699D61F9-FA0B-4970-ACB4-6BD63E9F14DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{699D61F9-FA0B-4970-ACB4-6BD63E9F14DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{699D61F9-FA0B-4970-ACB4-6BD63E9F14DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F492A250-174A-4751-BB48-1DB9A03EE5C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F492A250-174A-4751-BB48-1DB9A03EE5C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F492A250-174A-4751-BB48-1DB9A03EE5C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F492A250-174A-4751-BB48-1DB9A03EE5C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB09C578-9612-4A04-BFF2-40432FB34332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB09C578-9612-4A04-BFF2-40432FB34332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB09C578-9612-4A04-BFF2-40432FB34332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB09C578-9612-4A04-BFF2-40432FB34332}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
