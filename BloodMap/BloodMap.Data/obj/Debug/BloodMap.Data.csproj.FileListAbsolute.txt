@@ -1,0 +1,5 @@
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Data\bin\Debug\BloodMap.Data.dll
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Data\bin\Debug\BloodMap.Data.pdb
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Data\obj\Debug\BloodMap.Data.csprojResolveAssemblyReference.cache
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Data\obj\Debug\BloodMap.Data.dll
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Data\obj\Debug\BloodMap.Data.pdb
