@@ -9,19 +9,8 @@ using System.Web;
 
 namespace BloodMap.API.Models
 {
-    public class BMHttpResponse : HttpContent
-    {
-        private readonly MemoryStream _Stream = new MemoryStream();
+    public class BMHttpResponse  {
         public string Message { get; set; }
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
-        {
-            return _Stream.CopyToAsync(stream);
-        }
-
-        protected override bool TryComputeLength(out long length)
-        {
-            length = _Stream.Length;
-            return true;
-        }
+      
     }
 }

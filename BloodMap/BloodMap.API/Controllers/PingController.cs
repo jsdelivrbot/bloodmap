@@ -22,7 +22,6 @@ namespace BloodMap.API.Controllers
         public BMHttpResponse Get()
         {
             return new BMHttpResponse { Message = "Ping" };
-           
         }
     }
 }
