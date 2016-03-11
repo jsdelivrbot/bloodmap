@@ -24,5 +24,6 @@ D:\Reishabh\BloodMap\BloodMap\BloodMap.Tests\bin\Debug\System.Web.Razor.xml
 D:\Reishabh\BloodMap\BloodMap\BloodMap.Tests\bin\Debug\System.Web.WebPages.xml
 D:\Reishabh\BloodMap\BloodMap\BloodMap.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Reishabh\BloodMap\BloodMap\BloodMap.Tests\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Tests\obj\Debug\BloodMap.Tests.csprojResolveAssemblyReference.cache
 D:\Reishabh\BloodMap\BloodMap\BloodMap.Tests\obj\Debug\BloodMap.Tests.dll
 D:\Reishabh\BloodMap\BloodMap\BloodMap.Tests\obj\Debug\BloodMap.Tests.pdb
