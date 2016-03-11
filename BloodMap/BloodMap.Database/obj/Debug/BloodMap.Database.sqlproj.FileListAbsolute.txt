@@ -1,0 +1,9 @@
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Database\bin\Debug\BloodMap.Database.dacpac
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Database\bin\Debug\BloodMap.Database.dll
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Database\bin\Debug\BloodMap.Database.pdb
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Database\obj\Debug\Model.xml
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Database\obj\Debug\refactor.xml
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Database\obj\Debug\postdeploy.sql
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Database\obj\Debug\predeploy.sql
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Database\obj\Debug\BloodMap.Database.dll
+D:\Reishabh\BloodMap\BloodMap\BloodMap.Database\obj\Debug\BloodMap.Database.pdb
