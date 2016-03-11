@@ -57,5 +57,29 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="bin" />
+    <Folder Include="bin\Debug" />
+    <Folder Include="dbo" />
+    <Folder Include="dbo\Tables" />
+    <Folder Include="obj" />
+    <Folder Include="obj\Debug" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\BloodMap.Database.dacpac" />
+    <None Include="bin\Debug\BloodMap.Database.dll" />
+    <None Include="bin\Debug\BloodMap.Database.pdb" />
+    <None Include="obj\Debug\BloodMap.Database.dll" />
+    <None Include="obj\Debug\BloodMap.Database.pdb" />
+    <None Include="obj\Debug\BloodMap.Database.sqlproj.FileListAbsolute.txt" />
+    <None Include="obj\Debug\Model.xml" />
+    <None Include="BloodMap.Database.sqlproj.user" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Address.sql" />
+    <Build Include="dbo\Tables\Donor.sql" />
+    <Build Include="dbo\Tables\L_BloodGroup.sql" />
+    <Build Include="dbo\Tables\L_Role.sql" />
+    <Build Include="dbo\Tables\Login.sql" />
+    <Build Include="dbo\Tables\User.sql" />
   </ItemGroup>
 </Project>
