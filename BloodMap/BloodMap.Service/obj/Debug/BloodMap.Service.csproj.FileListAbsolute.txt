@@ -1,0 +1,12 @@
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\bin\Debug\BloodMap.Service.dll.config
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\bin\Debug\BloodMap.Service.dll
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\bin\Debug\BloodMap.Service.pdb
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\bin\Debug\BloodMap.Data.dll
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\bin\Debug\EntityFramework.dll
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\bin\Debug\EntityFramework.SqlServer.dll
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\bin\Debug\BloodMap.Data.pdb
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\bin\Debug\EntityFramework.xml
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\bin\Debug\EntityFramework.SqlServer.xml
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\obj\Debug\BloodMap.Service.csprojResolveAssemblyReference.cache
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\obj\Debug\BloodMap.Service.dll
+D:\Work\AngularAttack\BloodMap\BloodMap\BloodMap.Service\obj\Debug\BloodMap.Service.pdb

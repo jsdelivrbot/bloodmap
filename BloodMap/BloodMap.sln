@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodMap.Data", "BloodMap.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodMap.WebAPI", "BloodMap.WebAPI\BloodMap.WebAPI.csproj", "{E58DBF1F-E318-41E6-8525-9F9F9EE49BD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodMap.Service", "BloodMap.Service\BloodMap.Service.csproj", "{BA1EA652-5726-445A-8406-222CD4BF82F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E58DBF1F-E318-41E6-8525-9F9F9EE49BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E58DBF1F-E318-41E6-8525-9F9F9EE49BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E58DBF1F-E318-41E6-8525-9F9F9EE49BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA1EA652-5726-445A-8406-222CD4BF82F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1EA652-5726-445A-8406-222CD4BF82F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA1EA652-5726-445A-8406-222CD4BF82F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1EA652-5726-445A-8406-222CD4BF82F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

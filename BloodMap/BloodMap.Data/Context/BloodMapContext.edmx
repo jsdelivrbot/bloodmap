@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BloodMapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="300" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="PinCode" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Latitude" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="Longitude" Type="decimal" Precision="12" Scale="9" />
+        </EntityType>
+        <EntityType Name="Donor">
+          <Key>
+            <PropertyRef Name="DonorId" />
+          </Key>
+          <Property Name="DonorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrimaryAddress" Type="int" />
+          <Property Name="SecondaryAddress" Type="int" />
+          <Property Name="L_BloodGroupId" Type="int" />
+          <Property Name="LastDonationDate" Type="datetime" />
+          <Property Name="NoOfDonation" Type="int" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="L_BloodGroup">
+          <Key>
+            <PropertyRef Name="BloodGroupId" />
+          </Key>
+          <Property Name="BloodGroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="L_Role">
+          <Key>
+            <PropertyRef Name="L_RoleId" />
+          </Key>
+          <Property Name="L_RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="IsDonor" Type="bit" Nullable="false" />
+          <Property Name="L_RoleId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Donor_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="Donor">
+              <PropertyRef Name="PrimaryAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donor_Address1">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="Donor">
+              <PropertyRef Name="SecondaryAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donor_L_BloodGroup">
+          <End Role="L_BloodGroup" Type="Self.L_BloodGroup" Multiplicity="0..1" />
+          <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="L_BloodGroup">
+              <PropertyRef Name="BloodGroupId" />
+            </Principal>
+            <Dependent Role="Donor">
+              <PropertyRef Name="L_BloodGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donor_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Donor">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_L_Role">
+          <End Role="L_Role" Type="Self.L_Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="L_Role">
+              <PropertyRef Name="L_RoleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="L_RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BloodMapModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Donor" EntityType="Self.Donor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="L_BloodGroup" EntityType="Self.L_BloodGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="L_Role" EntityType="Self.L_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Donor_Address" Association="Self.FK_Donor_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Donor" EntitySet="Donor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donor_Address1" Association="Self.FK_Donor_Address1">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Donor" EntitySet="Donor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donor_L_BloodGroup" Association="Self.FK_Donor_L_BloodGroup">
+            <End Role="L_BloodGroup" EntitySet="L_BloodGroup" />
+            <End Role="Donor" EntitySet="Donor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donor_User" Association="Self.FK_Donor_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Donor" EntitySet="Donor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_User" Association="Self.FK_Login_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_L_Role" Association="Self.FK_User_L_Role">
+            <End Role="L_Role" EntitySet="L_Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BloodMapModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PinCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="12" Scale="9" />
+          <Property Name="Longitude" Type="Decimal" Precision="12" Scale="9" />
+          <NavigationProperty Name="Donors" Relationship="Self.FK_Donor_Address" FromRole="Address" ToRole="Donor" />
+          <NavigationProperty Name="Donors1" Relationship="Self.FK_Donor_Address1" FromRole="Address" ToRole="Donor" />
+        </EntityType>
+        <EntityType Name="Donor">
+          <Key>
+            <PropertyRef Name="DonorId" />
+          </Key>
+          <Property Name="DonorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrimaryAddress" Type="Int32" />
+          <Property Name="SecondaryAddress" Type="Int32" />
+          <Property Name="L_BloodGroupId" Type="Int32" />
+          <Property Name="LastDonationDate" Type="DateTime" Precision="3" />
+          <Property Name="NoOfDonation" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Donor_Address" FromRole="Donor" ToRole="Address" />
+          <NavigationProperty Name="Address1" Relationship="Self.FK_Donor_Address1" FromRole="Donor" ToRole="Address" />
+          <NavigationProperty Name="L_BloodGroup" Relationship="Self.FK_Donor_L_BloodGroup" FromRole="Donor" ToRole="L_BloodGroup" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Donor_User" FromRole="Donor" ToRole="User" />
+        </EntityType>
+        <EntityType Name="L_BloodGroup">
+          <Key>
+            <PropertyRef Name="BloodGroupId" />
+          </Key>
+          <Property Name="BloodGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Donors" Relationship="Self.FK_Donor_L_BloodGroup" FromRole="L_BloodGroup" ToRole="Donor" />
+        </EntityType>
+        <EntityType Name="L_Role">
+          <Key>
+            <PropertyRef Name="L_RoleId" />
+          </Key>
+          <Property Name="L_RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_L_Role" FromRole="L_Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Login_User" FromRole="Login" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDonor" Type="Boolean" Nullable="false" />
+          <Property Name="L_RoleId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Donors" Relationship="Self.FK_Donor_User" FromRole="User" ToRole="Donor" />
+          <NavigationProperty Name="L_Role" Relationship="Self.FK_User_L_Role" FromRole="User" ToRole="L_Role" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK_Login_User" FromRole="User" ToRole="Login" />
+        </EntityType>
+        <Association Name="FK_Donor_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="Donor">
+              <PropertyRef Name="PrimaryAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donor_Address1">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="Donor">
+              <PropertyRef Name="SecondaryAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donor_L_BloodGroup">
+          <End Role="L_BloodGroup" Type="Self.L_BloodGroup" Multiplicity="0..1" />
+          <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="L_BloodGroup">
+              <PropertyRef Name="BloodGroupId" />
+            </Principal>
+            <Dependent Role="Donor">
+              <PropertyRef Name="L_BloodGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donor_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Donor">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_L_Role">
+          <End Role="L_Role" Type="Self.L_Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="L_Role">
+              <PropertyRef Name="L_RoleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="L_RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BloodMapEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Donors" EntityType="Self.Donor" />
+          <EntitySet Name="L_BloodGroup" EntityType="Self.L_BloodGroup" />
+          <EntitySet Name="L_Role" EntityType="Self.L_Role" />
+          <EntitySet Name="Logins" EntityType="Self.Login" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Donor_Address" Association="Self.FK_Donor_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Donor" EntitySet="Donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donor_Address1" Association="Self.FK_Donor_Address1">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Donor" EntitySet="Donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donor_L_BloodGroup" Association="Self.FK_Donor_L_BloodGroup">
+            <End Role="L_BloodGroup" EntitySet="L_BloodGroup" />
+            <End Role="Donor" EntitySet="Donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donor_User" Association="Self.FK_Donor_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Donor" EntitySet="Donors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_L_Role" Association="Self.FK_User_L_Role">
+            <End Role="L_Role" EntitySet="L_Role" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_User" Association="Self.FK_Login_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Login" EntitySet="Logins" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BloodMapModelStoreContainer" CdmEntityContainer="BloodMapEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="BloodMapModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Address1" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Donors">
+            <EntityTypeMapping TypeName="BloodMapModel.Donor">
+              <MappingFragment StoreEntitySet="Donor">
+                <ScalarProperty Name="DonorId" ColumnName="DonorId" />
+                <ScalarProperty Name="PrimaryAddress" ColumnName="PrimaryAddress" />
+                <ScalarProperty Name="SecondaryAddress" ColumnName="SecondaryAddress" />
+                <ScalarProperty Name="L_BloodGroupId" ColumnName="L_BloodGroupId" />
+                <ScalarProperty Name="LastDonationDate" ColumnName="LastDonationDate" />
+                <ScalarProperty Name="NoOfDonation" ColumnName="NoOfDonation" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="L_BloodGroup">
+            <EntityTypeMapping TypeName="BloodMapModel.L_BloodGroup">
+              <MappingFragment StoreEntitySet="L_BloodGroup">
+                <ScalarProperty Name="BloodGroupId" ColumnName="BloodGroupId" />
+                <ScalarProperty Name="GroupTitle" ColumnName="GroupTitle" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="L_Role">
+            <EntityTypeMapping TypeName="BloodMapModel.L_Role">
+              <MappingFragment StoreEntitySet="L_Role">
+                <ScalarProperty Name="L_RoleId" ColumnName="L_RoleId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="BloodMapModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BloodMapModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BloodMapModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="IsDonor" ColumnName="IsDonor" />
+                <ScalarProperty Name="L_RoleId" ColumnName="L_RoleId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

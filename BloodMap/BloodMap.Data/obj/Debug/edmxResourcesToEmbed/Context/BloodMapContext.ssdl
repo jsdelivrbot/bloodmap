@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BloodMapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressId" />
+    </Key>
+    <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="300" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+    <Property Name="PinCode" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="Latitude" Type="decimal" Precision="12" Scale="9" />
+    <Property Name="Longitude" Type="decimal" Precision="12" Scale="9" />
+  </EntityType>
+  <EntityType Name="Donor">
+    <Key>
+      <PropertyRef Name="DonorId" />
+    </Key>
+    <Property Name="DonorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PrimaryAddress" Type="int" />
+    <Property Name="SecondaryAddress" Type="int" />
+    <Property Name="L_BloodGroupId" Type="int" />
+    <Property Name="LastDonationDate" Type="datetime" />
+    <Property Name="NoOfDonation" Type="int" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="L_BloodGroup">
+    <Key>
+      <PropertyRef Name="BloodGroupId" />
+    </Key>
+    <Property Name="BloodGroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="L_Role">
+    <Key>
+      <PropertyRef Name="L_RoleId" />
+    </Key>
+    <Property Name="L_RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="LoginId" />
+    </Key>
+    <Property Name="LoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmailId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="IsDonor" Type="bit" Nullable="false" />
+    <Property Name="L_RoleId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Donor_Address">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="Donor">
+        <PropertyRef Name="PrimaryAddress" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Donor_Address1">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressId" />
+      </Principal>
+      <Dependent Role="Donor">
+        <PropertyRef Name="SecondaryAddress" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Donor_L_BloodGroup">
+    <End Role="L_BloodGroup" Type="Self.L_BloodGroup" Multiplicity="0..1" />
+    <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="L_BloodGroup">
+        <PropertyRef Name="BloodGroupId" />
+      </Principal>
+      <Dependent Role="Donor">
+        <PropertyRef Name="L_BloodGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Donor_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Donor" Type="Self.Donor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Donor">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Login_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Login" Type="Self.Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_L_Role">
+    <End Role="L_Role" Type="Self.L_Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="L_Role">
+        <PropertyRef Name="L_RoleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="L_RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BloodMapModelStoreContainer">
+    <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Donor" EntityType="Self.Donor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="L_BloodGroup" EntityType="Self.L_BloodGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="L_Role" EntityType="Self.L_Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Donor_Address" Association="Self.FK_Donor_Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Donor" EntitySet="Donor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Donor_Address1" Association="Self.FK_Donor_Address1">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Donor" EntitySet="Donor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Donor_L_BloodGroup" Association="Self.FK_Donor_L_BloodGroup">
+      <End Role="L_BloodGroup" EntitySet="L_BloodGroup" />
+      <End Role="Donor" EntitySet="Donor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Donor_User" Association="Self.FK_Donor_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Donor" EntitySet="Donor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Login_User" Association="Self.FK_Login_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Login" EntitySet="Login" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_L_Role" Association="Self.FK_User_L_Role">
+      <End Role="L_Role" EntitySet="L_Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

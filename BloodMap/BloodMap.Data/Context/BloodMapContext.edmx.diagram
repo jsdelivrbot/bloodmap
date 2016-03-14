@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf6f260a0edb48e695b16b0acccf3b7b" Name="Diagram1">
+        <EntityTypeShape EntityType="BloodMapModel.Address" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodMapModel.Donor" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodMapModel.L_BloodGroup" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodMapModel.L_Role" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodMapModel.Login" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodMapModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodMapModel.User" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="BloodMapModel.FK_Donor_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodMapModel.FK_Donor_Address1" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodMapModel.FK_Donor_L_BloodGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodMapModel.FK_Donor_User" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodMapModel.FK_User_L_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodMapModel.FK_Login_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
