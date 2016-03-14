@@ -73,6 +73,7 @@
     <None Include="obj\Debug\BloodMap.Database.sqlproj.FileListAbsolute.txt" />
     <None Include="obj\Debug\Model.xml" />
     <None Include="BloodMap.Database.sqlproj.user" />
+    <None Include="BloodMap.Database.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Address.sql" />

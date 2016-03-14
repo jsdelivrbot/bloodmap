@@ -10,6 +10,8 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using BloodMap.WebAPI.Providers;
 using BloodMap.WebAPI.Models;
+using System.Security.Claims;
+using System.Web.Http;
 
 namespace BloodMap.WebAPI
 {
@@ -31,8 +33,9 @@ namespace BloodMap.WebAPI
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            // Configure the application for OAuth based flow
-            PublicClientId = "self";
+
+            PublicClientId = "945308399974-hbeuj4ejtmmhilpa2ft32vht4bbed5o4.apps.googleusercontent.com";
+
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
@@ -45,7 +48,9 @@ namespace BloodMap.WebAPI
 
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
-
+            var config = new HttpConfiguration();
+            config.MapHttpAttributeRoutes();
+            app.UseWebApi(config);
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
@@ -59,11 +64,11 @@ namespace BloodMap.WebAPI
             //    appId: "",
             //    appSecret: "");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "945308399974-hbeuj4ejtmmhilpa2ft32vht4bbed5o4.apps.googleusercontent.com",
-                ClientSecret = "rpAFiSr7wveZsZJYKErLP6wm"
-            });
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    ClientId = "945308399974-hbeuj4ejtmmhilpa2ft32vht4bbed5o4.apps.googleusercontent.com",
+            //    ClientSecret = "rpAFiSr7wveZsZJYKErLP6wm"
+            //});
         }
     }
 }
