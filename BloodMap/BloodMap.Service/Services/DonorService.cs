@@ -21,25 +21,27 @@ namespace BloodMap.Service.Services
             _context = new BloodMapEntities();
         }
 
-        //public IList<Donor> SearchDonors(Address address)
-        //{
-        //    var primaryDonors = _context.Donors.Where(x => 
-        //    x.PrimaryAddress.Country == address.Country
-        //    && x.PrimaryAddress.State == address.State
-        //    && x.PrimaryAddress.City == address.City 
-        //    && x.PrimaryAddress.PinCode == address.PinCode).Union(
-        //        from donor in _context.Donors where 
-        //    donor.SecondaryAddress.Country == address.Country
-        //    && donor.SecondaryAddress.State == address.State
-        //    && donor.SecondaryAddress.City == address.City
-        //    && donor.SecondaryAddress.PinCode == address.PinCode select donor);
+        public IList<Donor> SearchDonors(Address address)
+        {
+            var primaryDonors = _context.Donors.Where(x =>
+            x.Address1.Country == address.Country
+            && x.Address1.State == address.State
+            && x.Address1.City == address.City
+            && x.Address1.PinCode == address.PinCode).Union(
+                from donor in _context.Donors
+                where
+donor.Address.Country == address.Country
+&& donor.Address.State == address.State
+&& donor.Address.City == address.City
+&& donor.Address.PinCode == address.PinCode
+                select donor);
 
-        //    var filteredLocal = primaryDonors.Where(where => where.PrimaryAddress.Locality.Contains(address.Locality) || 
-        //    where.SecondaryAddress.Locality.Contains(address.Locality));
-        //    if (filteredLocal != null && filteredLocal.Count() > 0)
-        //        return filteredLocal.ToList();
-        //    else
-        //        return primaryDonors.ToList();
-        //}
+            var filteredLocal = primaryDonors.Where(where => where.Address1.Locality.Contains(address.Locality) ||
+            where.Address.Locality.Contains(address.Locality));
+            if (filteredLocal != null && filteredLocal.Count() > 0)
+                return filteredLocal.ToList();
+            else
+                return primaryDonors.ToList();
+        }
     }
 }

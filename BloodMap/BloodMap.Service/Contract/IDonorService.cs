@@ -9,6 +9,6 @@ namespace BloodMap.Service.Contract
 {
     public interface IDonorService
     {
-        //IList<Donor> SearchDonors(Address Address);
+        IList<Donor> SearchDonors(Address Address);
     }
 }
