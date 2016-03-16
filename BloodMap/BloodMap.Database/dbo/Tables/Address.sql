@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Address] (
     [AddressId] INT             IDENTITY (1, 1) NOT NULL,
-    [Address]   VARCHAR (300)   NULL,
+    [Locality]  VARCHAR (300)   NULL,
     [City]      VARCHAR (50)    NULL,
     [State]     VARCHAR (50)    NULL,
     [Country]   VARCHAR (50)    NULL,
@@ -10,4 +10,6 @@
     [Longitude] DECIMAL (12, 9) NULL,
     CONSTRAINT [PK_Address] PRIMARY KEY CLUSTERED ([AddressId] ASC)
 );
+
+
 

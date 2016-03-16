@@ -21,7 +21,8 @@ namespace BloodMap.WebAPI.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-        [AllowAnonymous]
+       
+       
         // GET api/values/5
         public string Get(int id)
         {
@@ -30,8 +31,10 @@ namespace BloodMap.WebAPI.Controllers
         }
 
         // POST api/values
+        [Route("api/sagar")]
         public void Post([FromBody]string value)
         {
+            var x = accserv.GetUser(1);
         }
 
         // PUT api/values/5

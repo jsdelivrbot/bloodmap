@@ -26,11 +26,10 @@ namespace BloodMap.Data.Context
         }
     
         public virtual DbSet<Address> Addresses { get; set; }
-        public virtual DbSet<Donor> Donors { get; set; }
         public virtual DbSet<L_BloodGroup> L_BloodGroup { get; set; }
         public virtual DbSet<L_Role> L_Role { get; set; }
-        public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Donor> Donors { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

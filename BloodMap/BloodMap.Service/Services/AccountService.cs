@@ -32,19 +32,14 @@ namespace BloodMap.Service.Services
             _context.Users.Add(user);
             if (user.IsDonor)
             {
-                foreach (var donor in user.Donors)
-                {
-                    //if (donor.Address != null)
-                    //    _context.Addresses.Add(donor.Address);
-                    //if (user.Donors.SecondaryAddress != null)
-                    //    _context.Addresses.Add(user.Donors.SecondaryAddress);
-                    //_context.Donors.Add(user.Donors);
-                }
-               
+                    if (user.Donor.Address != null)
+                        _context.Addresses.Add(user.Donor.Address);
+                    if (user.Donor.Address1 != null)
+                        _context.Addresses.Add(user.Donor.Address1);
+                    _context.Donors.Add(user.Donor);
             }
             _context.SaveChanges();
-            //return user.UserId;
-            return 1;
+            return user.UserId;
         }
 
         /// <summary>
@@ -77,7 +72,7 @@ namespace BloodMap.Service.Services
             if (dbUser != null)
             {
                 dbUser.IsDonor = user.IsDonor;
-                dbUser.Donors = user.Donors;
+                dbUser.Donor = user.Donor;
                 dbUser.DOB = user.DOB;
                 dbUser.FirstName = user.FirstName;
                 dbUser.LastName = user.LastName;
@@ -91,9 +86,9 @@ namespace BloodMap.Service.Services
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public Login VerifyLogin(string username, string password)
+        public User VerifyLogin(string username, string password)
         {
-            return _context.Logins.Where(where => where.EmailId == username && where.Password == password).FirstOrDefault();
+            return _context.Users.Where(where => where.EmailId == username && where.Password == password).FirstOrDefault();
         }
 
         /// <summary>
@@ -101,9 +96,9 @@ namespace BloodMap.Service.Services
         /// </summary>
         /// <param name="login"></param>
         /// <param name="newPassword"></param>
-        public void UpdatePassword(Login login, string newPassword)
+        public void UpdatePassword(int userId, string newPassword)
         {
-            var userLogin = _context.Logins.Where(where => where.EmailId == login.EmailId && where.Password == login.Password).FirstOrDefault();
+            var userLogin = _context.Users.Where(where => where.UserId == userId).FirstOrDefault();
             if (userLogin != null)
             {
                 userLogin.Password = newPassword;

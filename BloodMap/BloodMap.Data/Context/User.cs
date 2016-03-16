@@ -14,13 +14,6 @@ namespace BloodMap.Data.Context
     
     public partial class User
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            this.Donors = new HashSet<Donor>();
-            this.Logins = new HashSet<Login>();
-        }
-    
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -30,11 +23,11 @@ namespace BloodMap.Data.Context
         public int L_RoleId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string EmailId { get; set; }
+        public string Password { get; set; }
+        public int DonorId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Donor> Donors { get; set; }
+        public virtual Donor Donor { get; set; }
         public virtual L_Role L_Role { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Login> Logins { get; set; }
     }
 }

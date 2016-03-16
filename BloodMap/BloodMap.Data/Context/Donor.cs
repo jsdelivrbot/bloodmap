@@ -14,17 +14,23 @@ namespace BloodMap.Data.Context
     
     public partial class Donor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Donor()
+        {
+            this.Users = new HashSet<User>();
+        }
+    
         public int DonorId { get; set; }
         public Nullable<int> PrimaryAddressId { get; set; }
         public Nullable<int> SecondaryAddressId { get; set; }
         public Nullable<int> L_BloodGroupId { get; set; }
         public Nullable<System.DateTime> LastDonationDate { get; set; }
         public Nullable<int> NoOfDonation { get; set; }
-        public int UserId { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual Address Address1 { get; set; }
         public virtual L_BloodGroup L_BloodGroup { get; set; }
-        public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -72,9 +72,6 @@
     <Compile Include="Context\Donor.cs">
       <DependentUpon>BloodMapContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\Login.cs">
-      <DependentUpon>BloodMapContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Context\L_BloodGroup.cs">
       <DependentUpon>BloodMapContext.tt</DependentUpon>
     </Compile>

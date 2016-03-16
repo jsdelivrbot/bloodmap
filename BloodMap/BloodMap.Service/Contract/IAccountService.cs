@@ -9,7 +9,7 @@ namespace BloodMap.Service.Contract
 {
     public interface IAccountService
     {
-        Login VerifyLogin(string username, string password);
+        User VerifyLogin(string username, string password);
 
         User GetUser(int id);
 
@@ -19,6 +19,6 @@ namespace BloodMap.Service.Contract
 
         void DeleteUser(int userId);
 
-        void UpdatePassword(Login login, string newPassword);
+        void UpdatePassword(int userId, string newPassword);
     }
 }

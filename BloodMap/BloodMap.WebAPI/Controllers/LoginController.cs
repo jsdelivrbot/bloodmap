@@ -31,10 +31,11 @@ namespace BloodMap.WebAPI.Controllers
             var loginDetails = _accountService.VerifyLogin(login.UserName, login.Password);
             if (authenticated || loginDetails != null)
             {
-                var userDetails = loginDetails.User;
+              
                 var identity = new ClaimsIdentity(Startup.OAuthOptions.AuthenticationType);
                 identity.AddClaim(new Claim(ClaimTypes.Name, login.UserName));
-                identity.AddClaim(new Claim("FirstName", userDetails.FirstName));
+                identity.AddClaim(new Claim("FirstName", loginDetails.FirstName));
+                identity.AddClaim(new Claim("UserId", Convert.ToString(loginDetails.UserId)));
 
                 AuthenticationTicket ticket = new AuthenticationTicket(identity, new AuthenticationProperties());
                 var currentUtc = new SystemClock().UtcNow;
