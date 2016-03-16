@@ -15,12 +15,12 @@ namespace BloodMap.Data.Context
     public partial class Donor
     {
         public int DonorId { get; set; }
-        public Nullable<int> PrimaryAddress { get; set; }
-        public Nullable<int> SecondaryAddress { get; set; }
+        public Nullable<int> PrimaryAddressId { get; set; }
+        public Nullable<int> SecondaryAddressId { get; set; }
         public Nullable<int> L_BloodGroupId { get; set; }
         public Nullable<System.DateTime> LastDonationDate { get; set; }
         public Nullable<int> NoOfDonation { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int UserId { get; set; }
     
         public virtual Address Address { get; set; }
         public virtual Address Address1 { get; set; }

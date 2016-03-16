@@ -12,9 +12,10 @@ using System.Web.Security;
 
 namespace BloodMap.WebAPI.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class PingController : ApiController
     {
+        [HttpGet]
         public HttpResponseMessage Get()
         { return Request.CreateResponse(HttpStatusCode.OK, "Hello"); }
     }

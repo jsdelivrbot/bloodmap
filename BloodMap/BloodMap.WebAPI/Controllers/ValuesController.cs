@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BloodMap.Service.Contract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,15 +11,21 @@ namespace BloodMap.WebAPI.Controllers
     [Authorize]
     public class ValuesController : ApiController
     {
+        private IAccountService accserv;
+        public ValuesController(IAccountService account)
+        {
+            accserv = account;
+        }
         // GET api/values
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
-
+        [AllowAnonymous]
         // GET api/values/5
         public string Get(int id)
         {
+            var x = accserv.GetUser(1);
             return "value";
         }
 

@@ -9,7 +9,8 @@ using BloodMap.Data.Context;
 
 namespace BloodMap.Service.Services
 {
-    public class AccountService : IAccountService
+    public class AccountService 
+        : IAccountService
     {
         private readonly BloodMapEntities _context;
 
@@ -29,8 +30,21 @@ namespace BloodMap.Service.Services
         public int AddUser(User user)
         {
             _context.Users.Add(user);
+            if (user.IsDonor)
+            {
+                foreach (var donor in user.Donors)
+                {
+                    //if (donor.Address != null)
+                    //    _context.Addresses.Add(donor.Address);
+                    //if (user.Donors.SecondaryAddress != null)
+                    //    _context.Addresses.Add(user.Donors.SecondaryAddress);
+                    //_context.Donors.Add(user.Donors);
+                }
+               
+            }
             _context.SaveChanges();
-            return user.UserId;
+            //return user.UserId;
+            return 1;
         }
 
         /// <summary>

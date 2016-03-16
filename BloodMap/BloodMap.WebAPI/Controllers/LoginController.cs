@@ -1,4 +1,5 @@
 ﻿using BloodMap.Service.Contract;
+using BloodMap.Service.Services;
 using BloodMap.WebAPI.Models;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
@@ -14,26 +15,26 @@ namespace BloodMap.WebAPI.Controllers
 {
     public class LoginController : ApiController
     {
-
         private IAccountService _accountService;
-        public LoginController(IAccountService accountService)
+        public LoginController(IAccountService Accserv)
         {
-            _accountService = accountService;
+            _accountService = Accserv;       
         }
 
-
+        
         [HttpPost]
         [AllowAnonymous]
-        [Route("api/login")]
         public HttpResponseMessage Login(LoginModel login)
         {
             var authenticated = false;
+            _accountService = new AccountService();
             var loginDetails = _accountService.VerifyLogin(login.UserName, login.Password);
             if (authenticated || loginDetails != null)
             {
+                var userDetails = loginDetails.User;
                 var identity = new ClaimsIdentity(Startup.OAuthOptions.AuthenticationType);
                 identity.AddClaim(new Claim(ClaimTypes.Name, login.UserName));
-                identity.AddClaim(new Claim("FirstName", loginDetails.User.FirstName));
+                identity.AddClaim(new Claim("FirstName", userDetails.FirstName));
 
                 AuthenticationTicket ticket = new AuthenticationTicket(identity, new AuthenticationProperties());
                 var currentUtc = new SystemClock().UtcNow;
@@ -67,19 +68,6 @@ namespace BloodMap.WebAPI.Controllers
             HttpContext.Current.GetOwinContext().Authentication.SignOut(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie);
             return Request.CreateResponse(HttpStatusCode.OK, (new { message = "Logout successful." }));
         }
-        [HttpGet]
-        [Route("api/profile")]
-        [Authorize]
-        public HttpResponseMessage Profile()
-        {
-            var pass = ((ClaimsIdentity)User.Identity).FindFirst("Password");
-            return new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new ObjectContent<object>(new
-                {
-                    UserName = User.Identity.Name
-                }, Configuration.Formatters.JsonFormatter)
-            };
-        }
+        
     }
 }
