@@ -17,7 +17,7 @@ namespace BloodMap.Data.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public L_BloodGroup()
         {
-            this.Donors = new HashSet<Donor>();
+           // this.Donors = new HashSet<Donor>();
         }
     
         public int BloodGroupId { get; set; }
@@ -25,7 +25,7 @@ namespace BloodMap.Data.Context
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Donor> Donors { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+      //  public virtual ICollection<Donor> Donors { get; set; }
     }
 }
