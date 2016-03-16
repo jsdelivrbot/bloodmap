@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BloodMap.Data.Context;
-
+using BloodMap.Data.ViewModel;
 
 namespace BloodMap.Service.Services
 {
@@ -17,13 +17,14 @@ namespace BloodMap.Service.Services
             bloodMapContext = new BloodMapEntities();
         }
 
-        public IEnumerable<L_BloodGroup> Get()
+        public IEnumerable<LookupModel> GetAll()
         {
-            return bloodMapContext.L_BloodGroup.ToList();
+            return bloodMapContext.L_BloodGroup.Select(x => new LookupModel { Id = x.BloodGroupId, Value = x.GroupTitle }).ToList();
         }
 
         public L_BloodGroup Get(int id)
         {
-            return bloodMapContext.L_BloodGroup.Where(x => x.BloodGroupId == id).FirstOrDefault();        }
+            return bloodMapContext.L_BloodGroup.Where(x => x.BloodGroupId == id).FirstOrDefault();
+        }
     }
 }

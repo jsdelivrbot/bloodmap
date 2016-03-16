@@ -25,7 +25,7 @@ namespace BloodMap.API.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [Route("api/kill")]
+        [Route("api/login")]
         public HttpResponseMessage Login(LoginModel login)
         {
             var authenticated = false;

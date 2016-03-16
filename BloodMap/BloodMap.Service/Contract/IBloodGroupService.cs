@@ -1,4 +1,5 @@
 ﻿using BloodMap.Data.Context;
+using BloodMap.Data.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace BloodMap.Service.Contract
 {
     public interface IBloodGroupService
     {
-        IEnumerable<L_BloodGroup> Get();
+        IEnumerable<LookupModel> GetAll();
         L_BloodGroup Get(int id);
     }
 }

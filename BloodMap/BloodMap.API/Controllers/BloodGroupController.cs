@@ -1,4 +1,5 @@
-﻿using BloodMap.Service.Contract;
+﻿using BloodMap.API.Models;
+using BloodMap.Service.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,7 @@ namespace BloodMap.API.Controllers
         [Route("api/lookup/bloodgroup")]
         public HttpResponseMessage GetBloodGroups()
         {
-            var bloodGroups = _bloodGroupService.Get();
-            return Request.CreateResponse(HttpStatusCode.OK, bloodGroups);
+            return Request.CreateResponse(HttpStatusCode.OK, _bloodGroupService.GetAll());
         }
     }
 }
