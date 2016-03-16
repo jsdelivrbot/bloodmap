@@ -18,7 +18,7 @@ namespace BloodMap.Data.Context
         public User()
         {
             this.Donors = new HashSet<Donor>();
-            this.Logins = new HashSet<Login>();
+            this.Logins = new Login();
         }
     
         public int UserId { get; set; }
@@ -35,6 +35,6 @@ namespace BloodMap.Data.Context
         public virtual ICollection<Donor> Donors { get; set; }
         public virtual L_Role L_Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Login> Logins { get; set; }
+        public virtual Login Logins { get; set; }
     }
 }

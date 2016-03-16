@@ -49,8 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contract\IAccountService.cs" />
     <Compile Include="Contract\IBloodGroupService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\BloodGroupService.cs" />
   </ItemGroup>
   <ItemGroup>

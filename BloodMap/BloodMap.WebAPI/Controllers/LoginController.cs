@@ -1,4 +1,5 @@
-﻿using BloodMap.WebAPI.Models;
+﻿using BloodMap.Service.Contract;
+using BloodMap.WebAPI.Models;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
 using System;
@@ -13,17 +14,26 @@ namespace BloodMap.WebAPI.Controllers
 {
     public class LoginController : ApiController
     {
+
+        private IAccountService _accountService;
+        public LoginController(IAccountService accountService)
+        {
+            _accountService = accountService;
+        }
+
+
         [HttpPost]
         [AllowAnonymous]
         [Route("api/login")]
         public HttpResponseMessage Login(LoginModel login)
         {
             var authenticated = false;
-            if (authenticated || (login.UserName == "a" && login.Password == "a"))
+            var loginDetails = _accountService.VerifyLogin(login.UserName, login.Password);
+            if (authenticated || loginDetails != null)
             {
                 var identity = new ClaimsIdentity(Startup.OAuthOptions.AuthenticationType);
                 identity.AddClaim(new Claim(ClaimTypes.Name, login.UserName));
-                identity.AddClaim( new Claim("Password", login.Password));
+                identity.AddClaim(new Claim("FirstName", loginDetails.User.FirstName));
 
                 AuthenticationTicket ticket = new AuthenticationTicket(identity, new AuthenticationProperties());
                 var currentUtc = new SystemClock().UtcNow;
