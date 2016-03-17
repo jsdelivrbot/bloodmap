@@ -1,4 +1,5 @@
 ﻿using BloodMap.Data.Context;
+using BloodMap.Data.ViewModel;
 using BloodMap.Service.Contract;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,9 @@ namespace BloodMap.API.Controllers
         }
         [HttpPost]
         [Route("api/searchdonor")]
-        public HttpResponseMessage SearchDonor(Address searchAddress)
+        public HttpResponseMessage SearchDonor(SearchDonor searchDonor)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, _donorService.SearchDonors(searchAddress));
+            return Request.CreateResponse(HttpStatusCode.OK, _donorService.SearchDonors(searchDonor));
         }
 
     }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BloodMap.Data.Context;
-
+using BloodMap.Data.ViewModel;
 
 namespace BloodMap.Service.Services
 {
@@ -21,23 +21,25 @@ namespace BloodMap.Service.Services
             _context = new BloodMapEntities();
         }
 
-        public IList<Donor> SearchDonors(Address address)
+        public IList<Donor> SearchDonors(SearchDonor searchDonor)
         {
             var primaryDonors = _context.Donors.Where(x =>
-            x.Address1.Country == address.Country
-            && x.Address1.State == address.State
-            && x.Address1.City == address.City
-            && x.Address1.PinCode == address.PinCode).Union(
+            x.Address1.Country == searchDonor.Address.Country
+            && x.Address1.State == searchDonor.Address.State
+            && x.Address1.City == searchDonor.Address.City
+            && x.Address1.PinCode == searchDonor.Address.PinCode
+            && x.L_BloodGroupId == searchDonor.BloodGroupId).Union(
                 from donor in _context.Donors
                 where
-donor.Address.Country == address.Country
-&& donor.Address.State == address.State
-&& donor.Address.City == address.City
-&& donor.Address.PinCode == address.PinCode
+                donor.Address.Country == searchDonor.Address.Country
+                && donor.Address.State == searchDonor.Address.State
+                && donor.Address.City == searchDonor.Address.City
+                && donor.Address.PinCode == searchDonor.Address.PinCode
+                && donor.L_BloodGroupId == searchDonor.BloodGroupId
                 select donor);
 
-            var filteredLocal = primaryDonors.Where(where => where.Address1.Locality.Contains(address.Locality) ||
-            where.Address.Locality.Contains(address.Locality));
+            var filteredLocal = primaryDonors.Where(where => where.Address1.Locality.Contains(searchDonor.Address.Locality) ||
+            where.Address.Locality.Contains(searchDonor.Address.Locality));
             if (filteredLocal != null && filteredLocal.Count() > 0)
                 return filteredLocal.ToList();
             else
