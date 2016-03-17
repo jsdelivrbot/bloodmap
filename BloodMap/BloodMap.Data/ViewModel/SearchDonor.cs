@@ -1,15 +1,15 @@
 ﻿using BloodMap.Data.Context;
-using BloodMap.Data.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloodMap.Service.Contract
+namespace BloodMap.Data.ViewModel
 {
-    public interface IDonorService
+    public class SearchDonor
     {
-        IList<Donor> SearchDonors(SearchDonor searchDonor);
+        public Address Address { get; set; }
+        public int BloodGroupId { get; set; }
     }
 }
