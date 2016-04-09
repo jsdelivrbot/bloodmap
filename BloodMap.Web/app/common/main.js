@@ -1,8 +1,8 @@
-﻿//(function () {
-//    'use strict';
+﻿(function () {
+    'use strict';
 
-//    var common = angular.module('sampleCommon', [
+    var common = angular.module('BloodMap', [
 
-//        "ngRoute"
-//    ]);
-//})();
+        "ngRoute"
+    ]);
+})();
