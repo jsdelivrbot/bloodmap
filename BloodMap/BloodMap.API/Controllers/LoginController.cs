@@ -1,5 +1,6 @@
 ﻿using BloodMap.API.Models;
 using BloodMap.Service.Contract;
+using BloodMap.Service.Utility;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
 using System;
@@ -30,10 +31,9 @@ namespace BloodMap.API.Controllers
         [Route("api/login")]
         public HttpResponseMessage Login(LoginModel login)
         {
-            var authenticated = false;
-            
+
             var loginDetails = _accountService.VerifyLogin(login.UserName, login.Password);
-            if (authenticated || loginDetails != null)
+            if (loginDetails != null)
             {
 
                 var identity = new ClaimsIdentity(Startup.OAuthOptions.AuthenticationType);
@@ -47,16 +47,97 @@ namespace BloodMap.API.Controllers
                 ticket.Properties.ExpiresUtc = currentUtc.Add(TimeSpan.FromMinutes(30));
 
                 var token = Startup.OAuthOptions.AccessTokenFormat.Protect(ticket);
-                var response = new HttpResponseMessage(HttpStatusCode.OK)
+                HttpResponseMessage response;
+                if (login.RememberMe)
+                {
+                    Guid seriesIdentifier = Guid.NewGuid();
+                    string encToken = Hashing.GetHashSha256(new Guid().ToString());
+                    _accountService.InsertSecurityToken(new Data.Context.Re_Handshake()
+                    {
+                        CreatedDate = DateTime.Now,
+                        Id = Guid.NewGuid(),
+                        SeriesIdentifier = seriesIdentifier.ToString(),
+                        Token = encToken,
+                        UserId = loginDetails.UserId,
+                        LastLogin = null
+                    });
+                    response = new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new ObjectContent<object>(new
+                        {
+                            UserName = login.UserName,
+                            AccessToken = token,
+                            SeriesIdentifier = seriesIdentifier,
+                            RefreshToken = encToken
+                        }, Configuration.Formatters.JsonFormatter)
+                    };
+                }
+                else
+                {
+                    response = new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new ObjectContent<object>(new
+                        {
+                            UserName = login.UserName,
+                            AccessToken = token
+                        }, Configuration.Formatters.JsonFormatter)
+                    };
+                }
+                FormsAuthentication.SetAuthCookie(login.UserName, true);
+
+                return response;
+            }
+
+            return new HttpResponseMessage(HttpStatusCode.BadRequest);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("api/refreshtoken")]
+        public HttpResponseMessage RefreshToken(ReHandshakeModel login)
+        {
+
+            var loginDetails = _accountService.VerifyReHandshake(login.SeriesIdentifier, login.RefreshToken);
+            if (loginDetails != null)
+            {
+
+                var identity = new ClaimsIdentity(Startup.OAuthOptions.AuthenticationType);
+                identity.AddClaim(new Claim(ClaimTypes.Name, loginDetails.EmailId));
+                identity.AddClaim(new Claim("FirstName", loginDetails.FirstName));
+                identity.AddClaim(new Claim("UserId", Convert.ToString(loginDetails.UserId)));
+
+                AuthenticationTicket ticket = new AuthenticationTicket(identity, new AuthenticationProperties());
+                var currentUtc = new SystemClock().UtcNow;
+                ticket.Properties.IssuedUtc = currentUtc;
+                ticket.Properties.ExpiresUtc = currentUtc.Add(TimeSpan.FromMinutes(30));
+
+                var token = Startup.OAuthOptions.AccessTokenFormat.Protect(ticket);
+                HttpResponseMessage response;
+
+                Guid seriesIdentifier = Guid.NewGuid();
+                string encToken = Hashing.GetHashSha256(new Guid().ToString());
+                _accountService.InsertSecurityToken(new Data.Context.Re_Handshake()
+                {
+                    CreatedDate = DateTime.Now,
+                    Id = Guid.NewGuid(),
+                    SeriesIdentifier = seriesIdentifier.ToString(),
+                    Token = encToken,
+                    UserId = loginDetails.UserId,
+                    LastLogin = null
+                });
+                response = new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<object>(new
                     {
-                        UserName = login.UserName,
-                        AccessToken = token
+                        UserName = loginDetails.EmailId,
+                        AccessToken = token,
+                        SeriesIdentifier = seriesIdentifier,
+                        RefreshToken = encToken
                     }, Configuration.Formatters.JsonFormatter)
                 };
 
-                FormsAuthentication.SetAuthCookie(login.UserName, true);
+
+                FormsAuthentication.SetAuthCookie(loginDetails.EmailId, true);
 
                 return response;
             }

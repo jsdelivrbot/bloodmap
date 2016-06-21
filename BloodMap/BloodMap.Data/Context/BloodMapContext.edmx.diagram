@@ -16,6 +16,8 @@
         <AssociationConnector Association="BloodMapModel.FK_Donor_L_BloodGroup" />
         <AssociationConnector Association="BloodMapModel.FK_User_Donor" />
         <AssociationConnector Association="BloodMapModel.FK_User_L_Role" />
+        <EntityTypeShape EntityType="BloodMapModel.Re_Handshake" Width="1.5" PointX="7.5" PointY="7.5" />
+        <AssociationConnector Association="BloodMapModel.FK_Re_Handshake_User" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

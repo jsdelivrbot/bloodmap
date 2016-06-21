@@ -48,6 +48,17 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Re_Handshake">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SeriesIdentifier" Type="varchar" MaxLength="100" />
+          <Property Name="Token" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -111,6 +122,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Re_Handshake_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Re_Handshake" Type="Self.Re_Handshake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Re_Handshake">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Donor">
           <End Role="Donor" Type="Self.Donor" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -140,6 +163,7 @@
           <EntitySet Name="Donor" EntityType="Self.Donor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_BloodGroup" EntityType="Self.L_BloodGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_Role" EntityType="Self.L_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Re_Handshake" EntityType="Self.Re_Handshake" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Donor_Address" Association="Self.FK_Donor_Address">
@@ -153,6 +177,10 @@
           <AssociationSet Name="FK_Donor_L_BloodGroup" Association="Self.FK_Donor_L_BloodGroup">
             <End Role="L_BloodGroup" EntitySet="L_BloodGroup" />
             <End Role="Donor" EntitySet="Donor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Re_Handshake_User" Association="Self.FK_Re_Handshake_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Re_Handshake" EntitySet="Re_Handshake" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Donor" Association="Self.FK_User_Donor">
             <End Role="Donor" EntitySet="Donor" />
@@ -193,6 +221,11 @@
           <AssociationSet Name="FK_User_L_Role" Association="BloodMapModel.FK_User_L_Role">
             <End Role="L_Role" EntitySet="L_Role" />
             <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Re_Handshake" EntityType="BloodMapModel.Re_Handshake" />
+          <AssociationSet Name="FK_Re_Handshake_User" Association="BloodMapModel.FK_Re_Handshake_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Re_Handshake" EntitySet="Re_Handshake" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Address">
@@ -274,6 +307,7 @@
           <Property Name="DonorId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Donor" Relationship="BloodMapModel.FK_User_Donor" FromRole="User" ToRole="Donor" />
           <NavigationProperty Name="L_Role" Relationship="BloodMapModel.FK_User_L_Role" FromRole="User" ToRole="L_Role" />
+          <NavigationProperty Name="Re_Handshake" Relationship="BloodMapModel.FK_Re_Handshake_User" FromRole="User" ToRole="Re_Handshake" />
         </EntityType>
         <Association Name="FK_Donor_Address">
           <End Type="BloodMapModel.Address" Role="Address" Multiplicity="0..1" />
@@ -332,6 +366,30 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="L_RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Re_Handshake">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SeriesIdentifier" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Token" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="BloodMapModel.FK_Re_Handshake_User" FromRole="Re_Handshake" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Re_Handshake_User">
+          <End Type="BloodMapModel.User" Role="User" Multiplicity="1" />
+          <End Type="BloodMapModel.Re_Handshake" Role="Re_Handshake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Re_Handshake">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -414,6 +472,18 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Re_Handshake">
+            <EntityTypeMapping TypeName="BloodMapModel.Re_Handshake">
+              <MappingFragment StoreEntitySet="Re_Handshake">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="SeriesIdentifier" ColumnName="SeriesIdentifier" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

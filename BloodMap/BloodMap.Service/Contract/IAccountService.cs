@@ -20,5 +20,8 @@ namespace BloodMap.Service.Contract
         void DeleteUser(int userId);
 
         void UpdatePassword(int userId, string newPassword);
+        void InsertSecurityToken(Re_Handshake input);
+
+        User VerifyReHandshake(string key, string token);
     }
 }

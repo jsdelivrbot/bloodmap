@@ -78,6 +78,9 @@
     <Compile Include="Context\L_Role.cs">
       <DependentUpon>BloodMapContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\Re_Handshake.cs">
+      <DependentUpon>BloodMapContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\sysdiagram.cs">
       <DependentUpon>BloodMapContext.tt</DependentUpon>
     </Compile>

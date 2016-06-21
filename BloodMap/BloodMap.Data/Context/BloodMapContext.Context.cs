@@ -31,5 +31,6 @@ namespace BloodMap.Data.Context
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Donor> Donors { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Re_Handshake> Re_Handshake { get; set; }
     }
 }

@@ -90,7 +90,15 @@ namespace BloodMap.Service.Services
         {
             return _context.Users.Where(where => where.EmailId == username && where.Password == password).FirstOrDefault();
         }
-
+        public User VerifyReHandshake(string key, string token)
+        {
+            var rehandshake = _context.Re_Handshake.Where(where => where.SeriesIdentifier == key && where.Token == token).FirstOrDefault();
+            if (rehandshake.CreatedDate < DateTime.Now.AddDays(7))
+            {
+                return GetUser(rehandshake.UserId);
+            }
+            else return null;
+        }
         /// <summary>
         /// Update Password Method
         /// </summary>
@@ -103,6 +111,11 @@ namespace BloodMap.Service.Services
             {
                 userLogin.Password = newPassword;
             }
+        }
+        public void InsertSecurityToken(Re_Handshake input)
+        {
+            _context.Re_Handshake.Add(input);
+            _context.SaveChanges();
         }
 
     }

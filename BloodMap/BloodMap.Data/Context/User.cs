@@ -14,6 +14,12 @@ namespace BloodMap.Data.Context
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Re_Handshake = new HashSet<Re_Handshake>();
+        }
+    
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -29,5 +35,7 @@ namespace BloodMap.Data.Context
     
         public virtual Donor Donor { get; set; }
         public virtual L_Role L_Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Re_Handshake> Re_Handshake { get; set; }
     }
 }
