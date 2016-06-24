@@ -82,6 +82,7 @@
     <Build Include="dbo\Tables\L_BloodGroup.sql" />
     <Build Include="dbo\Tables\L_Role.sql" />
     <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\Re_Handshake.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="BloodMap.PostDeployment.sql" />
