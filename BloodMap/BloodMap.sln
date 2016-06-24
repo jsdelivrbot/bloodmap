@@ -13,6 +13,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BloodMap.Database", "BloodM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodMap.API", "BloodMap.API\BloodMap.API.csproj", "{9D92A749-1716-48F1-A11A-2BDDDC0AF572}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodMap.UI", "BloodMap.UI\BloodMap.UI.csproj", "{068BF0E5-96BB-45E2-B742-EB6D3C49225E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{9D92A749-1716-48F1-A11A-2BDDDC0AF572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D92A749-1716-48F1-A11A-2BDDDC0AF572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D92A749-1716-48F1-A11A-2BDDDC0AF572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{068BF0E5-96BB-45E2-B742-EB6D3C49225E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{068BF0E5-96BB-45E2-B742-EB6D3C49225E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{068BF0E5-96BB-45E2-B742-EB6D3C49225E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{068BF0E5-96BB-45E2-B742-EB6D3C49225E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

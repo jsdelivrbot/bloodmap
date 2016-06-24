@@ -1,0 +1,41 @@
+﻿<div ng-controller="loginCtrl as vm">
+    <div layout="row">
+        <div flex class="loginPageContainer">
+            <md-content layout-padding layout-align="center-center">
+                <md-toolbar md-scroll-shrink>
+                    <div class="md-toolbar-tools md-headline">
+                        Login to BloodMap
+                    </div>
+                </md-toolbar>
+                <form name="bloodMapLoginForm">
+                    <md-input-container class="md-block">
+                        <label>Username/Email-Id</label>
+                        <input type="email" name="loginUsername" ng-model="vm.userName" minlength="10"
+                               maxlength="100" ng-pattern="/^.+@.+\..+$/" required />
+                        <div ng-messages="bloodMapLoginForm.loginUsername.$error" role="alert">
+                            <div ng-message-exp="['required','minlength','maxlength','pattern']">
+                                Your email must be between 10 and 100 characters long and look like an e-mail address.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Password</label>
+                        <input type="password" name="loginPassword" ng-model="vm.userPassword" required />
+                        <div ng-messages="bloodMapLoginForm.loginUsername.$error" role="alert">
+                            <div ng-message-exp="['required']">
+                                Please enter password.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container>
+                        <md-button class="md-primary md-raised" ng-disabled="bloodMapLoginForm.$invalid" ng-click="vm.loginBloodMap()">Login</md-button>
+                    </md-input-container>
+                </form>
+            </md-content>
+        </div>
+        <!--<div flex class="loginBackgroundContainer">
+            Second item
+        </div>-->
+    </div>
+   
+</div>
